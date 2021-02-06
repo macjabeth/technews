@@ -24,7 +24,7 @@ const cleanPost = async (post) => {
 }
 
 export const posts = async () => {
-  const response = await fetch(process.env.GRIZZLY_SERVER)
+  const response = await fetch(process.env.GRIZZLY_SERVER + '/subreddits/top')
   const data = await response.json()
   return data.sort((a, b) => b.score - a.score).map(await cleanPost)
 }
