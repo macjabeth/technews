@@ -1,4 +1,5 @@
-import ClipLoader from 'react-spinners/ClipLoader'
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
+import Post from 'src/components/Post'
 
 export const QUERY = gql`
   query PostsQuery {
@@ -12,38 +13,31 @@ export const QUERY = gql`
   }
 `
 
-export const Loading = () => (
-  <div className="py-4">
-    <ClipLoader />
-  </div>
+export const Loading = () => {
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+  return (
+    <div className="py-4">
+      <SkeletonTheme
+        color={prefersDark ? '#6b7280' : '#757c89'}
+        highlightColor={prefersDark ? '#f3f4f6' : '#111827'}
+      >
+        <Skeleton count={5} />
+      </SkeletonTheme>
+    </div>
+  )
+}
+
+export const Empty = () => <div className="py-4">Empty</div>
+
+export const Failure = ({ error }) => (
+  <div className="py-4">Error: {error.message}</div>
 )
 
-export const Empty = () => <div>Empty</div>
-
-export const Failure = ({ error }) => <div>Error: {error.message}</div>
-
 export const Success = ({ posts }) => {
-  console.log(posts)
   return (
-    <ul className="divide-y divide-gray-200">
+    <ul className="divide-y divide-gray-200 dark:divide-gray-700">
       {posts.map((post) => (
-        <li key={post.id} className="py-4" role="article">
-          <header>
-            <h2 className="text-xl font-semibold text-gray-900">
-              <a
-                href={post.link_url || post.post_url}
-                target="_blank"
-                rel="noreferrer"
-              >
-                {post.title}
-              </a>
-            </h2>
-          </header>
-          <p
-            className="mt-3 text-base text-gray-500"
-            dangerouslySetInnerHTML={{ __html: post.body }}
-          />
-        </li>
+        <Post key={post.id} post={post} />
       ))}
     </ul>
   )

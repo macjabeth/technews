@@ -13,13 +13,14 @@
     ]
   },
   "dependencies": {
+    "@headlessui/react": "^0.2.0",
     "@redwoodjs/forms": "^0.24.0",
     "@redwoodjs/router": "^0.24.0",
     "@redwoodjs/web": "^0.24.0",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-spinners": "^0.10.4"
+    "react-loading-skeleton": "^2.1.1"
   },
   "devDependencies": {
     "autoprefixer": "9.8.6",
