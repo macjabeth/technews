@@ -6,7 +6,7 @@ export const schema = gql`
     score: Int!
     link_url: String!
     post_url: String!
-    body: String!
+    body: String
   }
 
   type Query {
